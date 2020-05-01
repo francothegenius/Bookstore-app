@@ -8,9 +8,34 @@
                 android:title="Home">
             </item>
             <item
-                android:id="@+id/categories"
+                android:id="@+id/scienceFiction"
                 android:icon="@drawable/ic_book"
-                android:title="Categories">
+                android:title="Science-Fiction">
+            </item>
+            <item
+                android:id="@+id/sports"
+                android:icon="@drawable/ic_book"
+                android:title="Sports">
+            </item>
+            <item
+                android:id="@+id/englishLiterature"
+                android:icon="@drawable/ic_book"
+                android:title="English Literature">
+            </item>
+            <item
+                android:id="@+id/artCulture"
+                android:icon="@drawable/ic_book"
+                android:title="Art and Culture">
+            </item>
+            <item
+                android:id="@+id/comics"
+                android:icon="@drawable/ic_book"
+                android:title="Comics">
+            </item>
+            <item
+                android:id="@+id/selfHelp"
+                android:icon="@drawable/ic_book"
+                android:title="Self-Help">
             </item>
         </menu>
     </item>
