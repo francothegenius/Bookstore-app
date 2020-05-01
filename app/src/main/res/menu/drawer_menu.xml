@@ -43,12 +43,12 @@
         <menu>
             <item
                 android:id="@+id/findus"
-                android:icon="@drawable/ic_home"
+                android:icon="@drawable/ic_map"
                 android:title="Find Us">
             </item>
             <item
                 android:id="@+id/contact"
-                android:icon="@drawable/ic_book"
+                android:icon="@drawable/ic_email"
                 android:title="Contact us">
             </item>
         </menu>
