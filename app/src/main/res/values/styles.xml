@@ -12,7 +12,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#006fcf</item>
         <item name="colorPrimaryDark">#006fcf</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">#1b41cc</item>
     </style>
 
 </resources>
