@@ -10,12 +10,19 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, RequestBook.Callback {
 
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
@@ -23,6 +30,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
+    DBHelper db;
+
+    JSONArray json;
+    List<Book> book_list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +48,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.setDrawerSlideAnimationEnabled(true);
         actionBarDrawerToggle.syncState();
+
+        this.db = new DBHelper(getApplicationContext());
+        RequestBook.getRequest(this,this);
+        book_list = new ArrayList<>();
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -103,5 +118,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         return false;
+    }
+
+    @Override
+    public void processJSON(String response) {
+        try{
+            json = new JSONArray(response);
+
+            for(int i = 0; i<json.length();i++)
+            {
+                JSONArray jsonArray = json.getJSONArray(i);
+
+                Book book = new Book(Integer.parseInt(jsonArray.getJSONObject(0).getString("id_book")),
+                                    jsonArray.getJSONObject(0).getString("title"),
+                                    jsonArray.getJSONObject(0).getString("author"),
+                                    jsonArray.getJSONObject(0).getString("category"),
+                                    jsonArray.getJSONObject(0).getString("editorial"),
+                                    jsonArray.getJSONObject(0).getString("description"),
+                                    jsonArray.getJSONObject(0).getString("price"),
+                                    jsonArray.getJSONObject(0).getString("url_picture"));
+                Log.e("prueba",book.getAuthor());
+                book_list.add(book);
+                db.insertBook(book);
+            }
+        }catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onError() {
+
     }
 }
