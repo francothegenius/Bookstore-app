@@ -49,7 +49,17 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Cursor getBooksByCategory(String category){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM books WHERE category=" + category,null);
+        //Cursor cursor = db.rawQuery("SELECT * FROM books WHERE category=" + category,null);
+        String[] selectionArgs = {category};
+        Cursor cursor = db.query(
+                "books",   // The table to query
+                null,             // The array of columns to return (pass null to get all)
+                "category=?",              // The columns for the WHERE clause
+                selectionArgs,          // The values for the WHERE clause
+                null,                   // don't group the rows
+                null,                   // don't filter by row groups
+                null              // The sort order
+        );
         cursor.moveToFirst();
         return cursor;
     }

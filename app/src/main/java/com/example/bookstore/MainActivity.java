@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DBHelper db;
 
     JSONArray json;
-    List<Book> book_list;
+    //ArrayList<Book> book_list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         this.db = new DBHelper(getApplicationContext());
         RequestBook.getRequest(this,this);
-        book_list = new ArrayList<>();
+        //book_list = new ArrayList<>();
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -138,8 +138,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     jsonArray.getJSONObject(0).getString("description"),
                                     jsonArray.getJSONObject(0).getString("price"),
                                     jsonArray.getJSONObject(0).getString("url_picture"));
-                Log.e("prueba",book.getAuthor());
-                book_list.add(book);
+                //book_list.add(book);
                 db.insertBook(book);
             }
         }catch(JSONException e)
