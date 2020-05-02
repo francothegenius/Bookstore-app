@@ -1,6 +1,7 @@
 package com.example.bookstore;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 
@@ -119,6 +120,11 @@ public class Sports extends Fragment {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setMessage(book_list.get(recyclerView.getChildAdapterPosition(v)).getDescription());
+                builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
                 AlertDialog alert = builder.create();
                 alert.setTitle("Description");
                 alert.show();
